@@ -155,3 +155,44 @@ null和undefined:
     变量在JavaScript中就是用一个变量名表示，变量名是大小写英文、数字、$和_的组合，且不能用数字开头
     变量名也不能是JavaScript的关键字，如if、while等
     申明一个变量用var语句
+        var a; // 申明了变量a，此时a的值为undefined
+        var $b = 1; // 申明了变量$b，同时给$b赋值，此时$b的值为1
+        var s_007 = '007'; // s_007是一个字符串
+        var Answer = true; // Answer是一个布尔值true
+        var t = null; // t的值是null
+    使用等号=对变量进行赋值
+    可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var申明一次
+        var a = 123; // a的值是整数123
+        a = 'ABC'; // a变为字符串
+
+strict模式：
+    如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量
+        i = 10; // i现在是全局变量
+    使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内，同名变量在不同的函数体内互不冲突。
+    strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误
+    启用strict模式的方法是在JavaScript代码的第一行写上：
+        'use strict';
+    这是一个字符串，不支持strict模式的浏览器会把它当做一个字符串语句执行，支持strict模式的浏览器将开启strict模式运行JavaScript
+    
+    如果浏览器支持strict模式，
+    下面的代码将报ReferenceError错误:
+        'use strict';
+        abc = 'Hello, world';
+        console.log(abc);
+
+字符串：
+    JavaScript的字符串就是用''或""括起来的字符表示
+    如果字符串内部既包含'又包含"可以用转义字符\来标识
+        'I\'m \"OK\"!';    表示的字符串内容是：I'm "OK"!
+
+多行字符串：
+    用反引号 ` ... ` 表示
+        `这是一个
+         多行
+         字符串`;
+
+模板字符串：
+    var name = '小明';
+    var age = 20;
+    var message = `你好, ${name}, 你今年${age}岁了!`;
+    alert(message);
