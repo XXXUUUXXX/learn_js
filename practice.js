@@ -4,4 +4,3 @@ var name = 'tom';
 var age = 20;
 console.log(`hello, ${name},you are ${age} years old`);
 
-//

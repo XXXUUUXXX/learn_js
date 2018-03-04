@@ -150,6 +150,52 @@ null和undefined:
         person.name; // 'Bob'
         person.zipcode; // null
 
+    属性名必须是一个有效的变量名。如果属性名包含特殊字符，就必须用''括起来
+        var xiaohong = {
+            name: '小红',
+            'middle-school': 'No.1 Middle School'
+        };
+    访问这个属性也无法使用.操作符，必须用['xxx']来访问：
+        xiaohong['middle-school']; // 'No.1 Middle School'
+        xiaohong['name']; // '小红'
+        xiaohong.name; // '小红'
+
+    JavaScript规定，访问不存在的属性不报错，而是返回undefined
+
+    由于JavaScript的对象是动态类型，你可以自由地给一个对象添加或删除属性：
+        var xiaoming = {
+            name: '小明'
+        };
+        xiaoming.age;  // undefined
+        xiaoming.age = 18;       // 新增一个age属性
+        xiaoming.age;  // 18
+        delete xiaoming.age;     // 删除age属性
+        xiaoming.age;  // undefined
+        delete xiaoming['name']; // 删除name属性
+        xiaoming.name; // undefined
+        delete xiaoming.school;  // 删除一个不存在的school属性也不会报错
+    检测xiaoming是否拥有某一属性，可以用in操作符：
+        var xiaoming = {
+            name: '小明',
+            birth: 1990,
+            school: 'No.1 Middle School',
+            height: 1.70,
+            weight: 65,
+            score: null
+        };
+        'name' in xiaoming; // true
+        'grade' in xiaoming; // false
+        注意：如果in判断一个属性存在，这个属性不一定是xiaoming的，它可能是xiaoming继承得到的
+            'toString' in xiaoming; // true
+        因为toString定义在object对象中，而所有对象最终都会在原型链上指向object，所以xiaoming也拥有toString属性。
+
+    要判断一个属性是否是xiaoming自身拥有的，而不是继承得到的，可以用hasOwnProperty()方法
+        var xiaoming = {
+            name: '小明'
+        };
+        xiaoming.hasOwnProperty('name'); // true
+        xiaoming.hasOwnProperty('toString'); // false
+
 变量：
     变量不仅可以是数字，还可以是任意数据类型
     变量在JavaScript中就是用一个变量名表示，变量名是大小写英文、数字、$和_的组合，且不能用数字开头
@@ -354,3 +400,44 @@ join
         var arr = [[1, 2, 3], [400, 500, 600], '-'];
     上述Array包含3个元素，其中头两个元素本身也是Array
 
+条件判断：
+    JavaScript使用if () {...} else {...}来进行条件判断
+        var age = 20;
+        if (age >= 18) { // 如果age >= 18为true，则执行if语句块
+            alert('adult');
+        } else { // 否则执行else语句块
+            alert('teenager');
+        }
+
+多行条件判断：
+    使用多个if...else...的组合
+        var age = 3;
+        if (age >= 18) {
+            alert('adult');
+        } else if (age >= 6) {
+            alert('teenager');
+        } else {
+            alert('kid');
+        }
+    在多个if...else...语句中，如果某个条件成立，则后续就不再继续判断
+    条件判断的顺序非常重要
+
+    如果if的条件判断语句结果不是true或false怎么办？例如：
+        var s = '123';
+        if (s.length) { // 条件计算结果为3
+            //
+        }
+    JavaScript把null、undefined、0、NaN和空字符串''视为false，其他值一概视为true，因此上述代码条件判断的结果是true
+
+循环：
+    JavaScript的循环有两种，一种是for循环，通过初始条件、结束条件和递增条件来循环执行语句块：
+        var x = 0;
+        var i;
+        for (i=1; i<=10000; i++) {
+            x = x + i;
+        }
+        x; // 50005000
+    for循环的控制条件：
+        i=1 这是初始条件，将变量i置为1；
+        i<=10000 这是判断条件，满足时就继续循环，不满足就退出循环；
+        i++ 这是每次循环后的递增条件，由于每次循环后变量i都会加1，因此它终将在若干次循环后不满足判断条件i<=10000而退出循环。
